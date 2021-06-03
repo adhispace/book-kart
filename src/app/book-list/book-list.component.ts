@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { filter, tap } from 'rxjs/operators';
+import { SearchBooks } from '../store/BookActions';
 
 @Component({
   selector: 'app-book-list',
@@ -10,12 +12,21 @@ import { filter, tap } from 'rxjs/operators';
 export class BookListComponent implements OnInit {
 
   bookList$;
+  bookToSearch: string;
+  searchBookURL = 'https://www.googleapis.com/books/v1/volumes';
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient, public store$: Store) {}
 
   ngOnInit(): void {
+  }
 
-    this.bookList$ = this.http.get('https://www.googleapis.com/books/v1/volumes?q=harry+potter&maxResults=40').pipe(tap(book => console.log(book)));
+  searchBooks() {
+    const params = new HttpParams().set('q', this.bookToSearch);
+    this.bookList$ = this.http.get(this.searchBookURL, {params})
+    .pipe(tap(book => console.log(book)));
+
+    this.store$.dispatch(SearchBooks({bookName: this.bookToSearch}));
+
   }
 
   numSequence(n = 0, isRating: string) {

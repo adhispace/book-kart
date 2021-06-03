@@ -9,6 +9,11 @@ import { BookComponent } from './book/book.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { CartComponent } from './cart/cart.component';
 import { BookFilterComponent } from './book-filter/book-filter.component';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { BookKartReducer } from './store/BookKartReducer';
+import { BookKartEffect } from './store/BookKartEffect';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,10 @@ import { BookFilterComponent } from './book-filter/book-filter.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    StoreModule.forRoot({bookKartReducer: BookKartReducer}),
+    EffectsModule.forRoot([BookKartEffect])
   ],
   providers: [],
   bootstrap: [AppComponent]

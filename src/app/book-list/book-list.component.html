@@ -1,6 +1,6 @@
 <div class="w-full h-15 flex flex-row bg-yellow-500 p-4">
     <div class="text-white text-xl">bookkart</div>
-    <input type="text" placeholder="search here" class="ml-80">
+    <input type="text" [(ngModel)]="bookToSearch" placeholder="search here" class="ml-80" (keyup.enter)="searchBooks()">
 </div>
 
 
