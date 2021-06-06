@@ -13,8 +13,8 @@ export class BookKartEffect {
 
     searchBooks$ = createEffect(() => this.actions$.pipe(
         ofType(SearchBooks.type),
-        switchMap((action) => {
-            return this.bookKartService.getAllBooksBySearchString('').pipe(map((res: any) => {
+        switchMap((action: any) => {
+            return this.bookKartService.getAllBooksBySearchString(action.bookName).pipe(map((res: any) => {
                 return loadBooks(res);
             }));
         })

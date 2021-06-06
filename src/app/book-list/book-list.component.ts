@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { filter, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { SearchBooks } from '../store/BookActions';
+import { getBookList$ } from '../store/BookSelectors';
 
 @Component({
   selector: 'app-book-list',
@@ -18,12 +19,13 @@ export class BookListComponent implements OnInit {
   constructor(public http: HttpClient, public store$: Store) {}
 
   ngOnInit(): void {
+    this.bookList$ = this.store$.select(getBookList$);
   }
 
   searchBooks() {
-    const params = new HttpParams().set('q', this.bookToSearch);
+    /* const params = new HttpParams().set('q', this.bookToSearch);
     this.bookList$ = this.http.get(this.searchBookURL, {params})
-    .pipe(tap(book => console.log(book)));
+    .pipe(tap(book => console.log(book))); */
 
     this.store$.dispatch(SearchBooks({bookName: this.bookToSearch}));
 

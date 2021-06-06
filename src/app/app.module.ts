@@ -11,9 +11,9 @@ import { CartComponent } from './cart/cart.component';
 import { BookFilterComponent } from './book-filter/book-filter.component';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { BookKartReducer } from './store/BookKartReducer';
 import { BookKartEffect } from './store/BookKartEffect';
 import { FormsModule } from '@angular/forms';
+import * as BookKartReducer from './store/BookKartReducer';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    StoreModule.forRoot({bookKartReducer: BookKartReducer}),
+    StoreModule.forRoot({bookKart: BookKartReducer.reducer}),
     EffectsModule.forRoot([BookKartEffect])
   ],
   providers: [],

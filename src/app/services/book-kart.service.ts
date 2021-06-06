@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,8 @@ export class BookKartService {
   constructor(private http: HttpClient) { }
 
   getAllBooksBySearchString(searchString: string) {
-    return this.http.get('https://www.googleapis.com/books/v1/volumes?q=harry+potter&maxResults=40');
+    const params = new HttpParams().set('q', searchString);
+    return this.http.get('https://www.googleapis.com/books/v1/volumes', {params});
   }
 
   getBookDetail() {
