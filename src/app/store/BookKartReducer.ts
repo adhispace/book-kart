@@ -1,23 +1,24 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { addBook, deleteBook, getBookDetail, loadBooks } from "./BookActions";
+import { addBookToCart, deleteBookFromCart, getBookDetail, loadSearchedBooks } from "./BookActions";
 
 export interface BookState {
     bookDetail: any;
-    books: []
+    books: [],
+    booksInCart: []
 }
 
 export const initialState: BookState = {
     bookDetail : {},
     books: [],
-
+    booksInCart: []
 }
 
 export const bookKartReducer = createReducer(
     initialState,
     on(getBookDetail, () => ({})),
-    on(loadBooks, (state, allBooks) => ({...state, books: allBooks})),
-    on(deleteBook, () => ({})),
-    on(addBook, () => ({}))
+    on(loadSearchedBooks, (state, allBooks) => ({...state, books: allBooks})),
+    on(deleteBookFromCart, () => ({})),
+    on(addBookToCart, (state: any, book) => ({...state, booksInCart: [...state.booksInCart, book]}))
 )
 
 export function reducer(state: BookState, action: Action) {

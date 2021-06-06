@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
 import { BookKartService } from "../services/book-kart.service";
-import { loadBooks, SearchBooks } from "./BookActions";
+import { loadSearchedBooks, searchBooks } from "./BookActions";
 import { props } from '@ngrx/store';
 
 @Injectable()
@@ -12,10 +12,10 @@ export class BookKartEffect {
     constructor(private actions$: Actions, private bookKartService: BookKartService) {}
 
     searchBooks$ = createEffect(() => this.actions$.pipe(
-        ofType(SearchBooks.type),
+        ofType(searchBooks.type),
         switchMap((action: any) => {
             return this.bookKartService.getAllBooksBySearchString(action.bookName).pipe(map((res: any) => {
-                return loadBooks(res);
+                return loadSearchedBooks(res);
             }));
         })
     ));
