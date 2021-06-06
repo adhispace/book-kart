@@ -16,8 +16,8 @@
                                 </div>
                                 <div class="ml-2" style="font-size: 14px;" *ngIf="book.volumeInfo.ratingsCount > 0">({{book.volumeInfo.ratingsCount}})</div>
                             </div>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="addToCart(book)">
-                                Add To Cart
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="deleteFromCart(book)">
+                                Delete
                               </button>
                         </div>
                     </figcaption>

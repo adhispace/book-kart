@@ -1,5 +1,5 @@
 <div class="w-full h-15 flex flex-row justify-between bg-yellow-800 p-4">
-    <div class="text-white text-xl italic mt-2 ml-2">bookkart</div>
+    <div class="text-white text-xl italic mt-2 ml-2" (click)="router.navigate['booklist']">bookkart</div>
     <input type="text" [(ngModel)]="bookToSearch" placeholder="search here" (keyup.enter)="searchBooks()">
     <div class="cart mt-2 mr-5 flex flex-row" (click)="navigateToCart()">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -9,6 +9,10 @@ const routes: Routes = [
     component: CartComponent
   },
   {
+    path: 'booklist',
+    component: BookListComponent
+  },
+  {
     path: '',
     component: BookListComponent
   }
