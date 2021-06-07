@@ -12,7 +12,7 @@ export class BookKartService {
   constructor(private http: HttpClient) { }
 
   getAllBooksBySearchString(searchString: string) {
-    const params = new HttpParams().set('q', searchString);
+    const params = new HttpParams().set('q', searchString).set('maxResults', '40');
     return this.http.get('https://www.googleapis.com/books/v1/volumes', {params});
   }
 
