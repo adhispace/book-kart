@@ -14,6 +14,7 @@ import { BookKartEffect } from './store/BookKartEffect';
 import { FormsModule } from '@angular/forms';
 import * as BookKartReducer from './store/BookKartReducer';
 import { HeaderComponent } from './header/header.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HeaderComponent } from './header/header.component';
     HttpClientModule,
     FormsModule,
     StoreModule.forRoot({bookKart: BookKartReducer.reducer}),
-    EffectsModule.forRoot([BookKartEffect])
+    EffectsModule.forRoot([BookKartEffect]),
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]

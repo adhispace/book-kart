@@ -1,7 +1,7 @@
 <div class="w-full h-15 flex flex-row justify-between bg-yellow-800 p-4">
-    <div class="text-white text-xl italic mt-2 ml-2" (click)="router.navigate['booklist']">bookkart</div>
+    <div class="text-white text-xl italic mt-2 ml-2 cursor-pointer" (click)="router.navigate(['booklist'])">bookkart</div>
     <input type="text" [(ngModel)]="bookToSearch" placeholder="search here" (keyup.enter)="searchBooks()">
-    <div class="cart mt-2 mr-5 flex flex-row" (click)="navigateToCart()">
+    <div class="cart mt-2 mr-5 flex flex-row cursor-pointer" (click)="navigateToCart()">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke="#fff" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
