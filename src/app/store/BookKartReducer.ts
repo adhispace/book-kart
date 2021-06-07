@@ -29,3 +29,4 @@ export function reducer(state: BookState, action: Action) {
 function removeBook(state, book) {
     return state.booksInCart.filter(cartBook => cartBook.id !== book.id);
 }
+
