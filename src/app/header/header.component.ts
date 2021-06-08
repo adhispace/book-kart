@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   }
 
   searchBooks() {
-    this.store$.dispatch(searchBooks({bookName: this.bookToSearch}));
+    this.store$.dispatch(searchBooks({bookName: this.bookToSearch, startIndex: '0'}));
   }
 
   navigateToCart() {

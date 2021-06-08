@@ -35,7 +35,7 @@ export class BookListComponent implements OnInit {
   this.store$.dispatch(addBookToCart(book));
   }
 
-  onScroll(bookToSearch: string) {
-    this.store$.dispatch(searchBooks({bookName: bookToSearch}));
+  onScroll(bookToSearch: string, bookList) {
+    this.store$.dispatch(searchBooks({bookName: bookToSearch, startIndex: bookList.length.toString()}));
   }
 }

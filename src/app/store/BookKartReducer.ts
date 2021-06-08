@@ -20,7 +20,7 @@ export const bookKartReducer = createReducer(
     initialState,
     on(getBookDetail, () => ({})),
     on(searchBooks, (state, bookName) => ({...state, bookToSearch: bookName})),
-    on(loadSearchedBooks, (state, allBooks) => ({...state, books: allBooks})),
+    on(loadSearchedBooks, (state: any, allBooks: any) => ({...state, books: [...state.books, ...allBooks.items]})),
     on(deleteBookFromCart, (state: any, book: any) => ({...state, booksInCart: removeBook(state, book)})),
     on(addBookToCart, (state: any, book) => ({...state, booksInCart: [...state.booksInCart, book]}))
 )

@@ -1,8 +1,8 @@
 <ng-container *ngIf="bookList$ | async as bookList">
     <ng-container *ngIf="bookToSearch$ | async as bookToSearch">
         <div class="flex-row justify-between" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
-            (scrolled)="onScroll(bookToSearch)">
-            <div *ngFor="let book of bookList.items" class="inline-block m-5">
+            (scrolled)="onScroll(bookToSearch, bookList)">
+            <div *ngFor="let book of bookList" class="inline-block m-5">
                 <div class="rounded w-60 h-auto">
                     <figure>
                         <img src="{{book.volumeInfo.imageLinks?.thumbnail}}" class="w-auto h-auto m-3" alt="">
