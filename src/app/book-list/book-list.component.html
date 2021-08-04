@@ -1,7 +1,7 @@
-<ng-container *ngIf="bookList$ | async as bookList">
-    <ng-container *ngIf="bookToSearch$ | async as bookToSearch">
+<ng-container *ngIf="bookToSearch$ | async as bookToSearch; else searchBooksInput">
+    <ng-container *ngIf="bookList$ | async as bookList">
         <div class="flex-row justify-between" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
-            (scrolled)="onScroll(bookToSearch, bookList)">
+            (scrolled)="onScroll(bookToSearch, bookList)" *ngIf="bookList && bookList.length; else searchBooksInput">
             <div *ngFor="let book of bookList" class="inline-block m-5">
                 <div class="rounded w-60 h-auto">
                     <figure>
@@ -30,10 +30,19 @@
                                     <div class="ml-2" style="font-size: 14px;" *ngIf="book.volumeInfo.ratingsCount > 0">
                                         ({{book.volumeInfo.ratingsCount}})</div>
                                 </div>
-                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                    (click)="addToCart(book)">
-                                    Add To Cart
-                                </button>
+                                <div *ngIf="booksInCart$ | async as booksInCart">
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                        (click)="addToCart(book)"
+                                        *ngIf="!booksInCartId.includes(book.id); else addedToCart">
+                                        Add To Cart
+                                    </button>
+                                    <ng-template #addedToCart>
+                                        <button
+                                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                                            Added To Cart
+                                        </button>
+                                    </ng-template>
+                                </div>
                             </div>
                         </figcaption>
                     </figure>
@@ -42,3 +51,14 @@
         </div>
     </ng-container>
 </ng-container>
+
+
+<ng-template #searchBooksInput>
+    <div class="book-search-bgnd">
+        <div class="relative w-96 m-auto top-72">
+            <input class="rounded w-96 py-2 px-10 text-gray-700 leading-tight focus:shadow-outline search-books-input"
+                type="text" [(ngModel)]="bookName" placeholder="search books here" (keyup.enter)="searchBooks()">
+            <i class="fa fa-search absolute top-3 right-6" aria-hidden="true"></i>
+        </div>
+    </div>
+</ng-template>

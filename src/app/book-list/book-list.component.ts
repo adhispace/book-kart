@@ -17,12 +17,17 @@ export class BookListComponent implements OnInit {
   booksInCart$;
   bookToSearch$;
   searchBookURL = 'https://www.googleapis.com/books/v1/volumes';
+  bookName: string;
+  booksInCartId;
+
 
   constructor(public http: HttpClient, public store$: Store, public router: Router) {}
 
   ngOnInit(): void {
     this.bookList$ = this.store$.select(getBookList$);
-    this.booksInCart$ = this.store$.select(getBooksInCart$);
+    this.booksInCart$ = this.store$.select(getBooksInCart$).pipe(tap(booksInCart => {
+      this.booksInCartId = booksInCart.map(book => book.id);
+    }));
     this.bookToSearch$ = this.store$.select(getBookSearchName$).pipe(map(book => book.bookName));
   }
 
@@ -37,5 +42,9 @@ export class BookListComponent implements OnInit {
 
   onScroll(bookToSearch: string, bookList) {
     this.store$.dispatch(searchBooks({bookName: bookToSearch, startIndex: bookList.length.toString()}));
+  }
+
+  searchBooks() {
+    this.store$.dispatch(searchBooks({bookName: this.bookName, startIndex: '0'}));
   }
 }

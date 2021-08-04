@@ -11,7 +11,6 @@ import { getBooksInCart$ } from '../store/BookSelectors';
 })
 export class HeaderComponent implements OnInit {
 
-  bookToSearch: string;
   booksInCart$;
 
   constructor(public store$: Store, public router: Router) { }
@@ -20,9 +19,7 @@ export class HeaderComponent implements OnInit {
     this.booksInCart$ = this.store$.select(getBooksInCart$);
   }
 
-  searchBooks() {
-    this.store$.dispatch(searchBooks({bookName: this.bookToSearch, startIndex: '0'}));
-  }
+  
 
   navigateToCart() {
     this.router.navigate(['cart']);
