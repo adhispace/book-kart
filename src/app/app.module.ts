@@ -15,6 +15,9 @@ import { FormsModule } from '@angular/forms';
 import * as BookKartReducer from './store/BookKartReducer';
 import { HeaderComponent } from './header/header.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ThemeModule } from './theme/theme.module';
+import { darkTheme } from './theme/dark-theme';
+import { lightTheme } from './theme/light-theme';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,11 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     FormsModule,
     StoreModule.forRoot({bookKart: BookKartReducer.reducer}),
     EffectsModule.forRoot([BookKartEffect]),
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    ThemeModule.forRoot({
+      themes: [darkTheme, lightTheme],
+      activeTheme: 'light'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
