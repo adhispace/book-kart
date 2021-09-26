@@ -1,5 +1,12 @@
 <div class="w-full h-15 flex flex-row justify-between bg-blue-900 p-4">
     <div class="text-white text-xl mt-2 ml-2 cursor-pointer" (click)="router.navigate(['booklist'])">book kart</div>
+    <div app-theme class="app-theme">
+        <div class="relative justify-center">
+            <input class="rounded w-96 px-10 leading-tight focus:shadow-outline search-books-input text-black"
+                type="text" [(ngModel)]="bookName" placeholder="search books here" (keyup.enter)="searchBooks()">
+            <i class="fa fa-search absolute top-3 right-6" aria-hidden="true"></i>
+        </div>
+    </div>
     <div class="header-icons flex flex-row">
         <div (click)="toggleTheme()" class="mr-10 relative top-2">
             <span *ngIf="activeTheme === 'light'">
@@ -9,14 +16,30 @@
                 <img src="../../assets/light-mode.svg" alt="">
             </span>
         </div>
-        <div class="cart mt-2 mr-5 flex flex-row cursor-pointer" (click)="navigateToCart()">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+        <div class="fav mt-2 mr-5 flex flex-row cursor-pointer" (click)="navigateToFav()">
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
                 <path stroke-linecap="round" stroke="#fff" stroke-linejoin="round" stroke-width="2"
                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg> -->
+
+
+            <svg id="Layer_1" class="h-6 w-6" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 122.88 107.39">
+                <defs>
+                    <style>
+                        .cls-1 {
+                            fill: #ed1b24;
+                            fill-rule: evenodd;
+                        }
+                    </style>
+                </defs>
+                <path class="cls-1"
+                    d="M60.83,17.18c8-8.35,13.62-15.57,26-17C110-2.46,131.27,21.26,119.57,44.61c-3.33,6.65-10.11,14.56-17.61,22.32-8.23,8.52-17.34,16.87-23.72,23.2l-17.4,17.26L46.46,93.55C29.16,76.89,1,55.92,0,29.94-.63,11.74,13.73.08,30.25.29c14.76.2,21,7.54,30.58,16.89Z" />
             </svg>
-            <ng-container *ngIf="booksInCart$ | async as booksInCart">
-                <span class='badge'> {{booksInCart.length}} </span>
+
+            <ng-container *ngIf="booksInFav$ | async as booksInFav">
+                <span class='badge'> {{booksInFav.length}} </span>
             </ng-container>
         </div>
     </div>

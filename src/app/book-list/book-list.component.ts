@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, map, tap } from 'rxjs/operators';
-import { searchBooks, addBookToCart } from '../store/BookActions';
-import { getBookList$, getBookSearchName$, getBooksInCart$ } from '../store/BookSelectors';
+import { searchBooks, addBookToFav } from '../store/BookActions';
+import { getBookList$, getBookSearchName$, getBooksInFav$ } from '../store/BookSelectors';
 
 @Component({
   selector: 'app-book-list',
@@ -14,19 +14,19 @@ import { getBookList$, getBookSearchName$, getBooksInCart$ } from '../store/Book
 export class BookListComponent implements OnInit {
 
   bookList$;
-  booksInCart$;
+  booksInFav$;
   bookToSearch$;
   searchBookURL = 'https://www.googleapis.com/books/v1/volumes';
   bookName: string;
-  booksInCartId;
+  booksInFavId;
 
 
   constructor(public http: HttpClient, public store$: Store, public router: Router) {}
 
   ngOnInit(): void {
     this.bookList$ = this.store$.select(getBookList$);
-    this.booksInCart$ = this.store$.select(getBooksInCart$).pipe(tap(booksInCart => {
-      this.booksInCartId = booksInCart.map(book => book.id);
+    this.booksInFav$ = this.store$.select(getBooksInFav$).pipe(tap(booksInFav => {
+      this.booksInFavId = booksInFav.map(book => book.id);
     }));
     this.bookToSearch$ = this.store$.select(getBookSearchName$).pipe(map(book => book.bookName));
   }
@@ -36,8 +36,8 @@ export class BookListComponent implements OnInit {
     return Array(roundedNo);
   }
 
-  addToCart(book) {
-  this.store$.dispatch(addBookToCart(book));
+  addToFav(book) {
+  this.store$.dispatch(addBookToFav(book));
   }
 
   onScroll(bookToSearch: string, bookList) {

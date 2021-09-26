@@ -1,7 +1,7 @@
 
-<div *ngIf="booksInCart$ | async as booksInCart" app-theme class="app-theme" style="min-height: 100vh;">
+<div *ngIf="booksInFav$ | async as booksInFav" app-theme class="app-theme" style="min-height: 100vh;">
     <div class="flex-row justify-between">
-        <div *ngFor="let book of booksInCart" class="inline-block m-5">
+        <div *ngFor="let book of booksInFav" class="inline-block m-5">
             <div class="rounded w-60 h-auto">
                 <figure>
                     <img src="{{book.volumeInfo.imageLinks?.thumbnail}}" class="w-auto h-auto m-3" alt="">
@@ -16,7 +16,7 @@
                                 </div>
                                 <div class="ml-2" style="font-size: 14px;" *ngIf="book.volumeInfo.ratingsCount > 0">({{book.volumeInfo.ratingsCount}})</div>
                             </div>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="deleteFromCart(book)">
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="deleteFromFav(book)">
                                 Delete
                               </button>
                         </div>

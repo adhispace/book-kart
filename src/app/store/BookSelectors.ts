@@ -6,6 +6,6 @@ export const getBookList$ = createSelector(bookState, (state: any) => {
     return state.books;
 });
 
-export const getBooksInCart$ = createSelector(bookState, (state: any) => state.booksInCart);
+export const getBooksInFav$ = createSelector(bookState, (state: any) => state.booksInFav);
 
 export const getBookSearchName$ = createSelector(bookState, (state: any) => state.bookToSearch);

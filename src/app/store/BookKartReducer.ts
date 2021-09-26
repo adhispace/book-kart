@@ -1,18 +1,18 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { addBookToCart, deleteBookFromCart, getBookDetail, loadSearchedBooks, searchBooks } from "./BookActions";
+import { addBookToFav, deleteBookFromFav, getBookDetail, loadSearchedBooks, searchBooks } from "./BookActions";
 import { filter } from 'rxjs/operators';
 
 export interface BookState {
     bookDetail: any;
     books: [],
-    booksInCart: [],
+    booksInFav: [],
     bookToSearch: string
 }
 
 export const initialState: BookState = {
     bookDetail : {},
     books: [],
-    booksInCart: [],
+    booksInFav: [],
     bookToSearch: ''
 }
 
@@ -21,8 +21,8 @@ export const bookKartReducer = createReducer(
     on(getBookDetail, () => ({})),
     on(searchBooks, (state, bookName) => ({...state, bookToSearch: bookName})),
     on(loadSearchedBooks, (state: any, allBooks: any) => ({...state, books: [...state.books, ...allBooks.items]})),
-    on(deleteBookFromCart, (state: any, book: any) => ({...state, booksInCart: removeBook(state, book)})),
-    on(addBookToCart, (state: any, book) => ({...state, booksInCart: [...state.booksInCart, book]}))
+    on(deleteBookFromFav, (state: any, book: any) => ({...state, booksInFav: removeBook(state, book)})),
+    on(addBookToFav, (state: any, book) => ({...state, booksInFav: [...state.booksInFav, book]}))
 )
 
 export function reducer(state: BookState, action: Action) {
@@ -30,6 +30,6 @@ export function reducer(state: BookState, action: Action) {
 }
 
 function removeBook(state, book) {
-    return state.booksInCart.filter(cartBook => cartBook.id !== book.id);
+    return state.booksInFav.filter(favBook => favBook.id !== book.id);
 }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { searchBooks } from '../store/BookActions';
-import { getBooksInCart$ } from '../store/BookSelectors';
+import { getBooksInFav$ } from '../store/BookSelectors';
 import { ThemeService } from '../theme/theme.service';
 
 @Component({
@@ -12,13 +12,14 @@ import { ThemeService } from '../theme/theme.service';
 })
 export class HeaderComponent implements OnInit {
 
-  booksInCart$;
+  booksInFav$;
   activeTheme: string;
+  bookName = '';
 
   constructor(public store$: Store, public router: Router, public themeService: ThemeService) { }
 
   ngOnInit(): void {
-    this.booksInCart$ = this.store$.select(getBooksInCart$);
+    this.booksInFav$ = this.store$.select(getBooksInFav$);
     this.activeTheme = this.themeService.getActiveTheme().name;
   }
 
@@ -32,8 +33,12 @@ export class HeaderComponent implements OnInit {
     this.activeTheme = this.themeService.getActiveTheme().name;
   }
 
-  navigateToCart() {
-    this.router.navigate(['cart']);
+  navigateToFav() {
+    this.router.navigate(['fav']);
+  }
+
+  searchBooks() {
+    this.store$.dispatch(searchBooks({bookName: this.bookName, startIndex: '0'}));
   }
 
 }
