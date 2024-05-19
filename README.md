@@ -1,6 +1,6 @@
 # BookKart
 
-Deployed at https://book-kart.vercel.app. Powered by google books
+Deployed at [BookKart](https://book-kart.vercel.app). Powered by google books
 
 ## Development server
 
